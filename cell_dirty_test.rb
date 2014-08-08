@@ -97,12 +97,23 @@ class CellDirtyTester < DirtyTester
     raise "Different position should be false" if cell.on_same_position?(cell2.position)
   end
 
-  def avoid_repeated_neighbours
+  def avoid_same_cell_as_neighbour
     cell = Cell.new
     cell.add_neighbour(Cell.new)
     raise "You cannot add yourself like a neighbour" unless cell.count_neighbours.number == 0
   end
 
+  def avoid_repeated_neighbours
+    cell = Cell.new
+    cell.add_neighbour(Cell.new(0,1), Cell.new(0,1))
+    raise "The repeated neighbours should not be added" unless cell.count_neighbours.number == 1
+  end
+
+  def avoid_repeated_neighbours
+    cell = Cell.new
+    cell.add_neighbour(Cell.new(0,1), Cell.new(0,1), Cell.new)
+    raise "The repeated neighbours and the own should not be added" unless cell.count_neighbours.number == 1
+  end
 end
 
 CellDirtyTester.new.run

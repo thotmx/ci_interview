@@ -31,7 +31,9 @@ class Cell
 
   def add_neighbour(*neighbours)
     neighbours.each do |neighbour|
-      @neighbours << neighbour unless on_same_position?(neighbour.position)
+      unless on_same_position?(neighbour.position) or is_a_repeated_neighbour?(neighbour)
+        @neighbours << neighbour
+      end
     end
   end
 
@@ -43,6 +45,12 @@ class Cell
     else
       @alive = true
     end
+  end
+
+  private
+
+  def is_a_repeated_neighbour?(new_neighbour)
+     @neighbours.any?{ |neighbour| neighbour.on_same_position?(new_neighbour.position) }
   end
 end
 
