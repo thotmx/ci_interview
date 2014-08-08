@@ -1,6 +1,7 @@
 class Cell
   def initialize
     @alive = true
+    @neighbours = []
   end
 
   def alive?
@@ -9,6 +10,10 @@ class Cell
 
   def die
     @alive = false
+  end
+
+  def count_neighbours
+    @neighbours.size
   end
 end
 
@@ -27,6 +32,11 @@ class DirtyTester
     cell = Cell.new
     cell.die
     raise "Fail" if cell.alive?
+  end
+
+  def count_neighbours
+    cell = Cell.new
+    raise "Fails" unless cell.count_neighbours == 0
   end
 
   def run
