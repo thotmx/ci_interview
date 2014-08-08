@@ -152,14 +152,6 @@ class CellDirtyTester < DirtyTester
     cell.add_neighbour(Cell.new(1,0))
     raise "Colony Members" unless cell.colony_members.size == 2
   end
-
-  def colony_members
-    cell = Cell.new(0,0)
-    cell.add_neighbour(Cell.new(1,0))
-    raise "Colony Members" unless cell.colony_members.size == 2
-  end
-
-
 end
 
 CellDirtyTester.new.run

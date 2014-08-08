@@ -2,7 +2,8 @@ require 'ostruct'
 
 class World
   def initialize(*cells)
-    @cells=cells
+    @cells = []
+    cells.each { |cell| add_cells(cell)}
   end
 
   def number_of_cells
@@ -18,7 +19,20 @@ class World
     end
   end
 
+  def count_the_colonies
+    OpenStruct.new(number: colonies.size)
+  end
+
   private
+  def colonies
+    colonies_array = []
+    @cells.each {|cell| colonies_array.push(cell.colony_members) unless is_in_a_colony?(colonies_array, cell) }
+    colonies_array
+  end
+
+  def is_in_a_colony?(colonies_array, member)
+    colonies_array.any?{ |colony| colony.include?(member) }
+  end
 
   def assign_neighbours(new_cell)
     @cells.each do |cell|

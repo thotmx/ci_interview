@@ -32,6 +32,27 @@ class WorldDirtyTester < DirtyTester
     raise "Adjacents should be neigbours" unless cell.count_neighbours.number == 1
   end
 
+  def get_the_number_of_colonies_empty_world
+    world = World.new()
+    raise "Empty world 0 colonies" unless world.count_the_colonies.number == 0
+  end
+
+  def the_number_of_colonies_with_one_cell
+    world = World.new(Cell.new)
+    raise "One cell world 1 colony" unless world.count_the_colonies.number == 1
+  end
+
+  def the_number_of_colonies_with_two_adjacents_cells
+    world = World.new(Cell.new(0,0), Cell.new(1,0))
+    raise "Two adjacents cells world 1 colony" unless world.count_the_colonies.number == 1
+  end
+
+  def the_number_of_colonies_with_three_not_adjacents_cells
+    world = World.new(Cell.new(0,0), Cell.new(2,0), Cell.new(5,0))
+    raise "Three not adjacents cells world 3 colonies" unless world.count_the_colonies.number == 3
+  end
+
+
 end
 
 WorldDirtyTester.new.run
