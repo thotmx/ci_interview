@@ -78,6 +78,24 @@ class CellDirtyTester < DirtyTester
     cell = Cell.new(1,5)
     raise "Position should be 1, 5" unless cell.position.column == 1 and cell.position.row == 5
   end
+
+  def return_true_on_same_position
+    cell = Cell.new
+    cell2 = Cell.new
+    raise "Same position should be true" unless cell.on_same_position?(cell2.position)
+  end
+
+  def return_false_on_different_position
+    cell = Cell.new
+    cell2 = Cell.new(5,1)
+    raise "Different position should be false" if cell.on_same_position?(cell2.position)
+  end
+
+  def return_false_on_different_position
+    cell = Cell.new
+    cell2 = Cell.new(1,0)
+    raise "Different position should be false" if cell.on_same_position?(cell2.position)
+  end
 end
 
 CellDirtyTester.new.run

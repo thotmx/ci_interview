@@ -21,6 +21,10 @@ class Cell
     OpenStruct.new(column: @column, row: @row)
   end
 
+  def on_same_position?(new_position)
+    position.column == new_position.column and position.row == new_position.row
+  end
+
   def count_neighbours
     OpenStruct.new(number: @neighbours.size)
   end
