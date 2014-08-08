@@ -19,11 +19,11 @@ class WorldDirtyTester < DirtyTester
     raise "World with one cell" unless world.number_of_cells.number == 1
   end
 
-  #def dont_add_duplicated_cells
-  #  world = World.new(Cell.new)
-  #  world.add_cells(Cell.new)
-  #  raise "Dont add duplicated cells" unless world.number_of_cells.number == 1
-  #end
+  def dont_add_duplicated_cells
+    world = World.new(Cell.new)
+    world.add_cells(Cell.new)
+    raise "Dont add duplicated cells" unless world.number_of_cells.number == 1
+  end
 
 end
 
