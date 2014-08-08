@@ -25,13 +25,13 @@ class CellDirtyTester < DirtyTester
 
   def add_neighbour
     cell = Cell.new
-    cell.add_neighbour(Cell.new)
+    cell.add_neighbour(Cell.new(0,1))
     raise "One neighbour" unless cell.count_neighbours.number == 1
   end
 
   def add_two_neighbours
     cell = Cell.new
-    cell.add_neighbour(Cell.new, Cell.new)
+    cell.add_neighbour(Cell.new(0,1), Cell.new(1,0))
     raise "Two neighbours" unless cell.count_neighbours.number == 2
   end
 
@@ -43,28 +43,28 @@ class CellDirtyTester < DirtyTester
 
   def tic_for_next_generation_with_2_neighbours_die
     cell = Cell.new
-    cell.add_neighbour(Cell.new,Cell.new)
+    cell.add_neighbour(Cell.new(1,0),Cell.new(0,1))
     cell.tic
     raise "2 Neighbours die" if cell.alive?
   end
 
   def tic_for_next_generation_with_4_neighbours_die
     cell = Cell.new
-    cell.add_neighbour(Cell.new, Cell.new, Cell.new, Cell.new)
+    cell.add_neighbour(Cell.new(0,1), Cell.new(1,0), Cell.new(-1,0), Cell.new(0,-1))
     cell.tic
     raise "4 neighbours die" if cell.alive?
   end
 
   def tic_for_next_generation_with_3_neighbours_live
     cell = Cell.new
-    cell.add_neighbour(Cell.new, Cell.new, Cell.new)
+    cell.add_neighbour(Cell.new(1,0), Cell.new(0,1), Cell.new(-1,0))
     cell.tic
     raise "3 neighbours live" unless cell.alive?
   end
 
-  def tic_for_next_generation_with_3_neighbours_and_shdead_should_live
+  def tic_for_next_generation_with_3_neighbours_and_dead_should_live
     cell = Cell.new.die
-    cell.add_neighbour(Cell.new, Cell.new, Cell.new)
+    cell.add_neighbour(Cell.new(0,1), Cell.new(-1,0), Cell.new(-1,1))
     cell.tic
     raise "3 neighbours live" unless cell.alive?
   end
@@ -96,6 +96,13 @@ class CellDirtyTester < DirtyTester
     cell2 = Cell.new(1,0)
     raise "Different position should be false" if cell.on_same_position?(cell2.position)
   end
+
+  def avoid_repeated_neighbours
+    cell = Cell.new
+    cell.add_neighbour(Cell.new)
+    raise "You cannot add yourself like a neighbour" unless cell.count_neighbours.number == 0
+  end
+
 end
 
 CellDirtyTester.new.run

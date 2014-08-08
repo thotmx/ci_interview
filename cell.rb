@@ -29,8 +29,10 @@ class Cell
     OpenStruct.new(number: @neighbours.size)
   end
 
-  def add_neighbour(*neighbour)
-    @neighbours += neighbour
+  def add_neighbour(*neighbours)
+    neighbours.each do |neighbour|
+      @neighbours << neighbour unless on_same_position?(neighbour.position)
+    end
   end
 
   def tic
