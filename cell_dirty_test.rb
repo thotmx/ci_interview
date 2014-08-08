@@ -68,8 +68,6 @@ class CellDirtyTester < DirtyTester
     cell.tic
     raise "3 neighbours live" unless cell.alive?
   end
-
-
 end
 
 CellDirtyTester.new.run
