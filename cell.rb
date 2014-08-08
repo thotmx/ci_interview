@@ -33,6 +33,7 @@ class Cell
     neighbours.each do |neighbour|
       unless on_same_position?(neighbour.position) or is_a_repeated_neighbour?(neighbour)
         @neighbours << neighbour
+        neighbour.add_neighbour(self)
       end
     end
   end

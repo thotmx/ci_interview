@@ -114,6 +114,14 @@ class CellDirtyTester < DirtyTester
     cell.add_neighbour(Cell.new(0,1), Cell.new(0,1), Cell.new)
     raise "The repeated neighbours and the own should not be added" unless cell.count_neighbours.number == 1
   end
+
+  def if_you_add_a_neighbour_you_should_be_his_neighbour
+    cell = Cell.new
+    cell2 = Cell.new(0,1)
+    cell.add_neighbour(cell2)
+    raise "You should be the neighbour of your neighbour" unless cell2.count_neighbours.number == 1
+  end
+
 end
 
 CellDirtyTester.new.run
