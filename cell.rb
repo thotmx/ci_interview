@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class Cell
   def initialize
     @alive = true
@@ -13,7 +15,7 @@ class Cell
   end
 
   def count_neighbours
-    @neighbours.size
+    OpenStruct.new(number: @neighbours.size)
   end
 
   def add_neighbour(*neighbour)
@@ -21,9 +23,9 @@ class Cell
   end
 
   def tic
-    if count_neighbours < 3
+    if count_neighbours.number < 3
       die
-    elsif count_neighbours > 3
+    elsif count_neighbours.number > 3
       die
     else
       @alive = true
