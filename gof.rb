@@ -1,6 +1,14 @@
 require './cell'
 
 class DirtyTester
+  def run
+    self.class.instance_methods(false).each do |method|
+      send(method) unless method == :run
+    end
+  end
+end
+
+class CellDirtyTester < DirtyTester
   def test_cell_creation
     cell = Cell.new
     raise "Fail" if cell.nil?
@@ -55,12 +63,9 @@ class DirtyTester
   end
 
 
-  def run
-    self.class.instance_methods(false).each do |method|
-      send(method) unless method == :run
-    end
-  end
 end
+
+CellDirtyTester.new.run
 
 DirtyTester.new.run
 
