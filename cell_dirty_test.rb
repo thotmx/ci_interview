@@ -122,6 +122,11 @@ class CellDirtyTester < DirtyTester
     raise "You should be the neighbour of your neighbour" unless cell2.count_neighbours.number == 1
   end
 
+  def a_position_is_a_neighbour_position
+    cell = Cell.new(0,0)
+    cell2 = Cell.new(1,0)
+    raise "If the position is adjacent should be neighbour" unless cell.is_a_neighbour_position?(cell2.position)
+  end
 end
 
 CellDirtyTester.new.run

@@ -1,6 +1,15 @@
 require 'ostruct'
 
 class Cell
+  DELTA_POSITIONS = [ { column: -1, row: 0 },
+                     { column: 1, row: 0 },
+                     { column: 0, row: 1 },
+                     { column: 0, row: -1 },
+                     { column: 1, row: -1 },
+                     { column: -1, row: 1 },
+                     { column: -1, row: -1 },
+                     { column: 1, row: 1 }]
+
   def initialize(column = 0, row = 0)
     @alive = true
     @neighbours = []
@@ -48,10 +57,20 @@ class Cell
     end
   end
 
+  def is_a_neighbour_position?(position)
+    neighbour_positions.include?([position.column, position.row])
+  end
+
   private
 
   def is_a_repeated_neighbour?(new_neighbour)
      @neighbours.any?{ |neighbour| neighbour.on_same_position?(new_neighbour.position) }
+  end
+
+  def neighbour_positions
+    DELTA_POSITIONS.map do |p|
+      [@column + p[:column], @row + p[:row]]
+    end
   end
 end
 
