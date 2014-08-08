@@ -89,5 +89,3 @@ class Cell
     @neighbours.select{|neighbour| neighbour if neighbour.alive? }.compact
   end
 end
-
-

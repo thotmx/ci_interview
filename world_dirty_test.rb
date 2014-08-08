@@ -86,8 +86,6 @@ class WorldDirtyTester < DirtyTester
 
     raise "The interview case should be 4" unless world.count_the_colonies.number == 4
   end
-
-
 end
 
 WorldDirtyTester.new.run
