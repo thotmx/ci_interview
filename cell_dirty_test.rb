@@ -134,6 +134,15 @@ class CellDirtyTester < DirtyTester
     raise "If the position is not adjacent should not be neighbour" if cell.is_a_neighbour_position?(cell2.position)
   end
 
+  def only_count_neighbour_alive_cells
+    cell = Cell.new(0,0)
+    cell2 = Cell.new(1,0)
+    cell3 = Cell.new(0,1)
+    cell.add_neighbour(cell2, cell3)
+    cell3.die
+    raise "Only count alive cells" unless cell.count_neighbours.number == 1
+  end
+
 end
 
 CellDirtyTester.new.run

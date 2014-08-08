@@ -35,7 +35,7 @@ class Cell
   end
 
   def count_neighbours
-    OpenStruct.new(number: @neighbours.size)
+    OpenStruct.new(number: alive_neighbours.size)
   end
 
   def add_neighbour(*neighbours)
@@ -71,6 +71,10 @@ class Cell
     DELTA_POSITIONS.map do |p|
       [@column + p[:column], @row + p[:row]]
     end
+  end
+
+  def alive_neighbours
+    @neighbours.select{|neighbour| neighbour if neighbour.alive? }.compact
   end
 end
 
