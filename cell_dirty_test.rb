@@ -115,6 +115,13 @@ class CellDirtyTester < DirtyTester
     raise "The repeated neighbours and the own should not be added" unless cell.count_neighbours.number == 1
   end
 
+  def avoid_not_adjacent_neighbours
+    cell = Cell.new
+    cell.add_neighbour(Cell.new(2,0))
+    raise "The not adjacent neighbours should not be added" unless cell.count_neighbours.number == 0
+  end
+
+
   def if_you_add_a_neighbour_you_should_be_his_neighbour
     cell = Cell.new
     cell2 = Cell.new(0,1)
@@ -136,12 +143,22 @@ class CellDirtyTester < DirtyTester
 
   def only_count_neighbour_alive_cells
     cell = Cell.new(0,0)
-    cell2 = Cell.new(1,0)
-    cell3 = Cell.new(0,1)
-    cell.add_neighbour(cell2, cell3)
-    cell3.die
+    cell.add_neighbour(Cell.new(1,0), Cell.new(0,1).die)
     raise "Only count alive cells" unless cell.count_neighbours.number == 1
   end
+
+  def colony_members_with_two_adjacent_cells
+    cell = Cell.new(0,0)
+    cell.add_neighbour(Cell.new(1,0))
+    raise "Colony Members" unless cell.colony_members.size == 2
+  end
+
+  def colony_members
+    cell = Cell.new(0,0)
+    cell.add_neighbour(Cell.new(1,0))
+    raise "Colony Members" unless cell.colony_members.size == 2
+  end
+
 
 end
 

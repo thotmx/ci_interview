@@ -40,7 +40,7 @@ class Cell
 
   def add_neighbour(*neighbours)
     neighbours.each do |neighbour|
-      unless on_same_position?(neighbour.position) or is_a_repeated_neighbour?(neighbour)
+      unless on_same_position?(neighbour.position) or is_a_repeated_neighbour?(neighbour) or is_not_a_neighbour_position?(neighbour.position)
         @neighbours << neighbour
         neighbour.add_neighbour(self)
       end
@@ -59,6 +59,18 @@ class Cell
 
   def is_a_neighbour_position?(position)
     neighbour_positions.include?([position.column, position.row])
+  end
+
+  def is_not_a_neighbour_position?(position)
+    not is_a_neighbour_position?(position)
+  end
+
+  def colony_members(visited=[])
+    visited.push(self) unless visited.include?(self)
+    @neighbours.each do |neighbour|
+      neighbour.colony_members(visited) unless visited.include?(neighbour)
+    end
+    visited
   end
 
   private
