@@ -1,9 +1,11 @@
 require 'ostruct'
 
 class Cell
-  def initialize
+  def initialize(column = 0, row = 0)
     @alive = true
     @neighbours = []
+    @column = column
+    @row = row
   end
 
   def alive?
@@ -16,7 +18,7 @@ class Cell
   end
 
   def position
-    OpenStruct.new(column: 0, row: 0)
+    OpenStruct.new(column: @column, row: @row)
   end
 
   def count_neighbours

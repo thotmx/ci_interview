@@ -69,9 +69,14 @@ class CellDirtyTester < DirtyTester
     raise "3 neighbours live" unless cell.alive?
   end
 
-  def create_a_new_cell_with_column_and_row
+  def create_a_new_cell_without_column_and_row
     cell = Cell.new
-    raise "Position 0, 0" unless cell.position.column == 0 and cell.position.row == 0
+    raise "Position should 0, 0" unless cell.position.column == 0 and cell.position.row == 0
+  end
+
+  def create_a_new_cell_with_column_and_row
+    cell = Cell.new(1,0)
+    raise "Position should be 1, 0" unless cell.position.column == 1 and cell.position.row == 0
   end
 end
 
