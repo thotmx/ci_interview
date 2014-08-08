@@ -49,6 +49,17 @@ class DirtyTester
     raise "Fail" if cell.alive?
   end
 
+  def tic_for_next_generation_with_4_neighbours_die
+    cell = Cell.new
+    cell.add_neighbour(Cell.new)
+    cell.add_neighbour(Cell.new)
+    cell.add_neighbour(Cell.new)
+    cell.add_neighbour(Cell.new)
+    cell.tic
+    raise "Fail" if cell.alive?
+  end
+
+
   def run
     self.class.instance_methods(false).each do |method|
       send(method) unless method == :run

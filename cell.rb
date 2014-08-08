@@ -16,13 +16,17 @@ class Cell
     @neighbours.size
   end
 
-  def add_neighbour(neighbour)
-    @neighbours << neighbour
+  def add_neighbour(*neighbour)
+    @neighbours += neighbour
   end
 
   def tic
     if count_neighbours < 3
       die
+    elsif count_neighbours > 3
+      die
+    else
+      @alive = true
     end
   end
 end
