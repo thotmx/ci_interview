@@ -1,12 +1,5 @@
+require './dirty_tester'
 require './cell'
-
-class DirtyTester
-  def run
-    self.class.instance_methods(false).each do |method|
-      send(method) unless method == :run
-    end
-  end
-end
 
 class CellDirtyTester < DirtyTester
   def test_cell_creation
@@ -61,11 +54,7 @@ class CellDirtyTester < DirtyTester
     cell.tic
     raise "Fail" if cell.alive?
   end
-
-
 end
 
 CellDirtyTester.new.run
-
-DirtyTester.new.run
 
