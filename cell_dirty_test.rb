@@ -75,8 +75,8 @@ class CellDirtyTester < DirtyTester
   end
 
   def create_a_new_cell_with_column_and_row
-    cell = Cell.new(1,0)
-    raise "Position should be 1, 0" unless cell.position.column == 1 and cell.position.row == 0
+    cell = Cell.new(1,5)
+    raise "Position should be 1, 5" unless cell.position.column == 1 and cell.position.row == 5
   end
 end
 
