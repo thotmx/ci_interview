@@ -19,7 +19,34 @@ class DirtyTester
 
   def count_neighbours
     cell = Cell.new
-    raise "Fails" unless cell.count_neighbours == 0
+    raise "Fail" unless cell.count_neighbours == 0
+  end
+
+  def add_neighbour
+    cell = Cell.new
+    cell.add_neighbour(Cell.new)
+    raise "Fail" unless cell.count_neighbours == 1
+  end
+
+  def add_two_neighbours
+    cell = Cell.new
+    cell.add_neighbour(Cell.new)
+    cell.add_neighbour(Cell.new)
+    raise "Fail" unless cell.count_neighbours == 2
+  end
+
+  def tic_for_next_generation_with_0_neighbours_die
+    cell = Cell.new
+    cell.tic
+    raise "Fail" if cell.alive?
+  end
+
+  def tic_for_next_generation_with_2_neighbours_die
+    cell = Cell.new
+    cell.add_neighbour(Cell.new)
+    cell.add_neighbour(Cell.new)
+    cell.tic
+    raise "Fail" if cell.alive?
   end
 
   def run
@@ -30,3 +57,4 @@ class DirtyTester
 end
 
 DirtyTester.new.run
+
