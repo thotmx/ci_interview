@@ -1,20 +1,26 @@
 class Cell
+  def initialize
+    @alive = true
+  end
+
   def alive?
-    false
+    @alive
   end
 end
 
+class DirtyTester
 
-def test_cell_creation
-  cell = Cell.new
-  raise "Fail" if cell.nil?
+  def self.test_cell_creation
+    cell = Cell.new
+    raise "Fail" if cell.nil?
+  end
+
+  def self.create_cell_alive
+    cell = Cell.new
+    raise "Fail" unless cell.alive?
+  end
+
 end
 
-def create_cell_alive
-  cell = Cell.new
-  raise "Fail" unless cell.alive?
-end
-
-
-test_cell_creation
-create_cell_alive
+DirtyTester.test_cell_creation
+DirtyTester.create_cell_alive
