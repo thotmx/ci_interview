@@ -52,6 +52,41 @@ class WorldDirtyTester < DirtyTester
     raise "Three not adjacents cells world 3 colonies" unless world.count_the_colonies.number == 3
   end
 
+  def the_test_case_of_the_interview
+    # 0 0 0 0 0 1 0
+    # 1 1 0 1 0 1 0
+    # 1 1 0 0 0 0 0
+    # 1 1 0 0 1 0 0
+    # 0 0 1 0 1 1 0
+    # 0 0 1 0 1 0 0
+    # 0 0 0 0 1 0 0
+    world = World.new( Cell.new(5,0),
+
+                      Cell.new(0,1),
+                      Cell.new(1,1),
+                      Cell.new(3,1),
+                      Cell.new(5,1),
+
+                      Cell.new(0,2),
+                      Cell.new(1,2),
+
+                      Cell.new(0,3),
+                      Cell.new(1,3),
+                      Cell.new(4,3),
+
+                      Cell.new(2,4),
+                      Cell.new(4,4),
+                      Cell.new(5,4),
+
+                      Cell.new(2,5),
+                      Cell.new(4,5),
+
+                      Cell.new(4,6)
+                     )
+
+    raise "The interview case should be 4" unless world.count_the_colonies.number == 4
+  end
+
 
 end
 
