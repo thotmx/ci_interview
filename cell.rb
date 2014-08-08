@@ -15,6 +15,10 @@ class Cell
     self
   end
 
+  def position
+    OpenStruct.new(column: 0, row: 0)
+  end
+
   def count_neighbours
     OpenStruct.new(number: @neighbours.size)
   end
