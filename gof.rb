@@ -6,6 +6,10 @@ class Cell
   def alive?
     @alive
   end
+
+  def die
+    @alive = false
+  end
 end
 
 class DirtyTester
