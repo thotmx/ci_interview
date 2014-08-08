@@ -12,6 +12,7 @@ class Cell
 
   def die
     @alive = false
+    self
   end
 
   def count_neighbours
