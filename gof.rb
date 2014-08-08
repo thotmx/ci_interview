@@ -10,17 +10,21 @@ end
 
 class DirtyTester
 
-  def self.test_cell_creation
+  def test_cell_creation
     cell = Cell.new
     raise "Fail" if cell.nil?
   end
 
-  def self.create_cell_alive
+  def create_cell_alive
     cell = Cell.new
     raise "Fail" unless cell.alive?
   end
 
+  def run
+    methods(false).each do |method|
+      send(method) unless method == :run
+    end
+  end
 end
 
-DirtyTester.test_cell_creation
-DirtyTester.create_cell_alive
+DirtyTester.new.run
