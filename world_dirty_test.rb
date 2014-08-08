@@ -25,6 +25,13 @@ class WorldDirtyTester < DirtyTester
     raise "Dont add duplicated cells" unless world.number_of_cells.number == 1
   end
 
+  def neighbouring_the_adjacents
+    cell = Cell.new
+    world = World.new(cell)
+    world.add_cells(Cell.new(1,0))
+    raise "Adjacents should be neigbours" unless cell.count_neighbours.number == 1
+  end
+
 end
 
 WorldDirtyTester.new.run
